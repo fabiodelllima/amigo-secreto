@@ -22,7 +22,12 @@ function adicionarAmigo() {
   const nome = input.value.trim();
 
   if (nome === "") {
-    alert("Por favor, digite um nome!");
+    alert(MENSAGENS.ERRO_CAMPO_VAZIO);
+    return;
+  }
+
+  if (amigos.includes(nome)) {
+    alert(MENSAGENS.ERRO_NOME_DUPLICADO);
     return;
   }
 
