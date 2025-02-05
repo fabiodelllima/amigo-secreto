@@ -1,3 +1,9 @@
+import {
+  MINIMO_PARTICIPANTES,
+  MAX_TENTATIVAS_SORTEIO,
+  MENSAGENS,
+} from "./constants.js";
+
 let amigos = [];
 
 function atualizarListaAmigos() {
