@@ -115,3 +115,36 @@ function sortearAmigo() {
   botao.onclick = recomecarJogo;
 }
 
+function recomecarJogo() {
+  const input = document.getElementById("amigo");
+  const botao = document.querySelector(".button-draw");
+  const listaAmigos = document.getElementById("listaAmigos");
+
+  amigos = [];
+  document.getElementById("listaAmigos").innerHTML = "";
+  document.getElementById("resultado").innerHTML = "";
+  listaAmigos.style.display = "block";
+
+  input.value = "";
+  input.focus();
+
+  botao.innerHTML = `
+        <img src="assets/play_circle_outline.png" alt="Ícone para sortear" />
+        Sortear amigo
+    `;
+  botao.onclick = sortearAmigo;
+}
+
+function configurarEventos() {
+  document.getElementById("amigo").addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      adicionarAmigo();
+    }
+  });
+}
+
+window.adicionarAmigo = adicionarAmigo;
+window.sortearAmigo = sortearAmigo;
+window.recomecarJogo = recomecarJogo;
+
+document.addEventListener("DOMContentLoaded", configurarEventos);
