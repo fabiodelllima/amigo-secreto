@@ -135,6 +135,16 @@ function recomecarJogo() {
   botao.onclick = sortearAmigo;
 }
 
+function configurarEventos() {
+  document.getElementById("amigo").addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      adicionarAmigo();
+    }
+  });
+}
+
 window.adicionarAmigo = adicionarAmigo;
 window.sortearAmigo = sortearAmigo;
 window.recomecarJogo = recomecarJogo;
+
+document.addEventListener("DOMContentLoaded", configurarEventos);
