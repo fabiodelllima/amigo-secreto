@@ -135,3 +135,6 @@ function recomecarJogo() {
   botao.onclick = sortearAmigo;
 }
 
+window.adicionarAmigo = adicionarAmigo;
+window.sortearAmigo = sortearAmigo;
+window.recomecarJogo = recomecarJogo;
