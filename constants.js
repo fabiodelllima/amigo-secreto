@@ -7,4 +7,6 @@ export const MENSAGENS = {
   ERRO_SORTEIO: `Não foi possível realizar o sorteio.\n
      Por favor, tente novamente.`,
   ERRO_NOME_DUPLICADO: "Este nome já foi adicionado!",
+  ERRO_QUANTIDADE_IMPAR:
+    "O número de participantes precisa ser par para realizar o sorteio.",
 };

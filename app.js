@@ -56,7 +56,7 @@ function sortearAmigo() {
   }
 
   if (amigos.length % 2 !== 0) {
-    alert("O número de participantes precisa ser par para realizar o sorteio!");
+    alert(MENSAGENS.ERRO_QUANTIDADE_IMPAR);
     return;
   }
 
