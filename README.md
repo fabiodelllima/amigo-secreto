@@ -1,10 +1,8 @@
 # Amigo Secreto
 
-> Uma aplicação web interativa para organizar sorteios de Amigo Secreto, desenvolvida como parte do programa **Oracle Next Education (ONE)**, uma parceria entre **Oracle** e **Alura**.
+> Uma aplicação web interativa para organizar sorteios de **Amigo Secreto**, desenvolvida como parte do programa **Oracle Next Education (ONE)**, uma parceria entre **Oracle** e **Alura**.
 
-**Deploy**:
-
-> https://secreto-amigo.vercel.app/
+> Deploy: https://secreto-amigo.vercel.app/
 
 ### Índice
 
@@ -67,12 +65,20 @@ Para executar o projeto em seu ambiente local, você precisará de:
 Siga estes passos para executar o projeto localmente:
 
 1. Clone o repositório:
-   bash
+   ```bash
+   # Via HTTPS:
    git clone https://github.com/fabiodelllima/amigo-secreto.git
+   
+   # Via SSH:
+   git clone git@github.com:fabiodelllima/amigo-secreto.git
+   
+   # Entre na pasta do projeto
    cd amigo-secreto
-2. Inicie um servidor local. Você pode usar o Live Server do VSCode ou executar:
-   bash
+   ```
+2. Inicie um servidor local. Você pode usar o **Live Server** do **VSCode** ou executar:
+   ```bash
    npx serve .
+   ```
 3. Acesse a aplicação em seu navegador através do endereço indicado pelo servidor local
 
 ### Funcionamento
