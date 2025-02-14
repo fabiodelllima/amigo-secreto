@@ -1,3 +1,5 @@
+import { MINIMO_PARTICIPANTES } from "./config.js";
+
 export const MENSAGENS = {
   ERRO_CAMPO_VAZIO: "Por favor, insira um nome.",
   ERRO_MINIMO_PARTICIPANTES: (total) =>

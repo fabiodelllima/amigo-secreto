@@ -1,4 +1,5 @@
-import { MINIMO_PARTICIPANTES, MENSAGENS } from "../constants/messages.js";
+import { MINIMO_PARTICIPANTES } from "../constants/config.js";
+import { MENSAGENS } from "../constants/messages.js";
 
 export function validarNovoAmigo(nome, amigosAtuais) {
   const nomeProcessado = nome.trim();
