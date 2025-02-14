@@ -5,7 +5,7 @@ import {
   limparEstado,
 } from "./state/index.js";
 import { validarNovoAmigo, validarSorteio } from "./core/validators.js";
-import { gerarSorteio } from "./core/sorteio.js";
+import { gerarSorteio } from "./core/draw.js";
 import {
   atualizarListaAmigos,
   atualizarResultadoNaTela,
@@ -77,5 +77,8 @@ window.sortearAmigo = sortearAmigo;
 window.recomecarJogo = recomecarJogo;
 
 document.addEventListener("DOMContentLoaded", () => {
-  configurarEventos({ adicionar: adicionarAmigo });
+  configurarEventos({
+    adicionar: adicionarAmigo,
+    sortear: sortearAmigo,
+  });
 });

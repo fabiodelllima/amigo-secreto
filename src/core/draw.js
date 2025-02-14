@@ -1,4 +1,4 @@
-import { MAX_TENTATIVAS_SORTEIO, MENSAGENS } from "../constants/index.js";
+import { MAX_TENTATIVAS_SORTEIO, MENSAGENS } from "../constants/messages.js";
 
 function gerarParAmigos(quemEntrega, possiveisRecebedores) {
   const indexReceber = Math.floor(Math.random() * possiveisRecebedores.length);
