@@ -1,12 +1,4 @@
 export function configurarEventos(handlers) {
-  document.getElementById("amigo").addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      handlers.adicionar();
-    }
-  });
-}
-
-export function configurarEventos(handlers) {
   document
     .getElementById("btnAdicionar")
     .addEventListener("click", handlers.adicionar);
