@@ -1,84 +1,83 @@
+import { validateNewFriend, validateDraw } from "./core/validators.js";
+import { setupEventListeners } from "./ui/events.js";
+import { generateDraw } from "./core/draw.js";
 import {
-  Estado,
-  adicionarAmigoAoEstado,
-  atualizarResultadoSorteio,
-  limparEstado,
+  State,
+  addFriendToState,
+  updateDrawResult,
+  clearState,
 } from "./state/index.js";
-import { validarNovoAmigo, validarSorteio } from "./core/validators.js";
-import { gerarSorteio } from "./core/draw.js";
 import {
-  atualizarListaAmigos,
-  atualizarResultadoNaTela,
-  atualizarBotaoSortear,
+  updateFriendsList,
+  updateResultDisplay,
+  updateDrawButton,
 } from "./ui/dom.js";
-import { configurarEventos } from "./ui/events.js";
 
-function adicionarAmigo() {
-  const input = document.getElementById("amigo");
-  const nome = input.value;
+function addFriend() {
+  const input = document.getElementById("friend");
+  const name = input.value;
 
-  const validacao = validarNovoAmigo(nome, Estado.amigos);
-
-  if (!validacao.valido) {
-    alert(validacao.erro);
+  const validation = validateNewFriend(name, State.friends);
+  if (!validation.valid) {
+    alert(validation.error);
     return;
   }
 
-  const novoEstado = adicionarAmigoAoEstado(Estado, validacao.nome);
-  Object.assign(Estado, novoEstado);
+  const newState = addFriendToState(State, validation.name);
+  Object.assign(State, newState);
 
-  atualizarListaAmigos(Estado.amigos);
+  updateFriendsList(State.friends);
   input.value = "";
   input.focus();
 }
 
-function sortearAmigo() {
-  const validacao = validarSorteio(Estado.amigos);
-
-  if (!validacao.valido) {
-    alert(validacao.erro);
+function drawNames() {
+  const validation = validateDraw(State.friends);
+  if (!validation.valid) {
+    alert(validation.error);
     return;
   }
 
-  const resultado = gerarSorteio(Estado.amigos);
-
-  if (!resultado.sucesso) {
-    alert(resultado.erro);
+  const result = generateDraw(State.friends);
+  if (!result.success) {
+    alert(result.error);
     return;
   }
 
-  const novoEstado = atualizarResultadoSorteio(Estado, resultado);
-  Object.assign(Estado, novoEstado);
+  const newState = updateDrawResult(State, result);
+  Object.assign(State, newState);
 
-  atualizarResultadoNaTela(Estado.resultado);
-  atualizarBotaoSortear(true, {
-    recomecar: recomecarJogo,
-    sortear: sortearAmigo,
+  updateResultDisplay(State.result);
+  updateDrawButton(true, {
+    restart: restartGame,
+    draw: drawNames,
   });
 }
 
-function recomecarJogo() {
-  const novoEstado = limparEstado();
-  Object.assign(Estado, novoEstado);
+function restartGame() {
+  const newState = clearState();
+  Object.assign(State, newState);
 
-  const input = document.getElementById("amigo");
-  atualizarListaAmigos(Estado.amigos);
-  atualizarResultadoNaTela(null);
-  atualizarBotaoSortear(false, {
-    recomecar: recomecarJogo,
-    sortear: sortearAmigo,
+  const input = document.getElementById("friend");
+
+  updateFriendsList(State.friends);
+  updateResultDisplay(null);
+  updateDrawButton(false, {
+    restart: restartGame,
+    draw: drawNames,
   });
+
   input.value = "";
   input.focus();
 }
 
-window.adicionarAmigo = adicionarAmigo;
-window.sortearAmigo = sortearAmigo;
-window.recomecarJogo = recomecarJogo;
+window.addFriend = addFriend;
+window.drawNames = drawNames;
+window.restartGame = restartGame;
 
 document.addEventListener("DOMContentLoaded", () => {
-  configurarEventos({
-    adicionar: adicionarAmigo,
-    sortear: sortearAmigo,
+  setupEventListeners({
+    add: addFriend,
+    draw: drawNames,
   });
 });

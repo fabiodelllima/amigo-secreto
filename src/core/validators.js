@@ -1,47 +1,42 @@
-import { MINIMO_PARTICIPANTES } from "../constants/config.js";
-import { MENSAGENS } from "../constants/messages.js";
+import { MIN_PARTICIPANTS } from "../constants/config.js";
+import { MESSAGES } from "../constants/messages.js";
 
-export function validarNovoAmigo(nome, amigosAtuais) {
-  const nomeProcessado = nome.trim();
-
-  if (nomeProcessado === "") {
+export function validateNewFriend(name, currentFriends) {
+  const processedName = name.trim();
+  if (processedName === "") {
     return {
-      valido: false,
-      erro: MENSAGENS.ERRO_CAMPO_VAZIO,
+      valid: false,
+      error: MESSAGES.EMPTY_FIELD_ERROR,
     };
   }
-
-  if (amigosAtuais.includes(nomeProcessado)) {
+  if (currentFriends.includes(processedName)) {
     return {
-      valido: false,
-      erro: MENSAGENS.ERRO_NOME_DUPLICADO,
+      valid: false,
+      error: MESSAGES.DUPLICATE_NAME_ERROR,
     };
   }
-
   return {
-    valido: true,
-    nome: nomeProcessado,
-    erro: null,
+    valid: true,
+    name: processedName,
+    error: null,
   };
 }
 
-export function validarSorteio(amigos) {
-  if (amigos.length < MINIMO_PARTICIPANTES) {
+export function validateDraw(friends) {
+  if (friends.length < MIN_PARTICIPANTS) {
     return {
-      valido: false,
-      erro: MENSAGENS.ERRO_MINIMO_PARTICIPANTES(amigos.length),
+      valid: false,
+      error: MESSAGES.MIN_PARTICIPANTS_ERROR(friends.length),
     };
   }
-
-  if (amigos.length % 2 !== 0) {
+  if (friends.length % 2 !== 0) {
     return {
-      valido: false,
-      erro: MENSAGENS.ERRO_QUANTIDADE_IMPAR,
+      valid: false,
+      error: MESSAGES.ODD_COUNT_ERROR,
     };
   }
-
   return {
-    valido: true,
-    erro: null,
+    valid: true,
+    error: null,
   };
 }

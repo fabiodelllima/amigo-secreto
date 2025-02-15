@@ -1,15 +1,13 @@
-export function configurarEventos(handlers) {
-  document
-    .getElementById("btnAdicionar")
-    .addEventListener("click", handlers.adicionar);
+export function setupEventListeners(handlers) {
+  document.getElementById("addButton").addEventListener("click", handlers.add);
 
   document
-    .getElementById("btnSortear")
-    .addEventListener("click", handlers.sortear);
+    .getElementById("drawButton")
+    .addEventListener("click", handlers.draw);
 
-  document.getElementById("amigo").addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      handlers.adicionar();
+  document.getElementById("friend").addEventListener("keypress", (event) => {
+    if (event.key === "Enter") {
+      handlers.add();
     }
   });
 }
