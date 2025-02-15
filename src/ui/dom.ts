@@ -2,32 +2,25 @@ import { DrawResult, ButtonHandlers } from "../types";
 
 export const updateFriendsList = (friends: string[]): void => {
   const list = document.getElementById("friendsList");
-  if (!list) return;
-  list.innerHTML = "";
-  friends.forEach((friend) => {
-    const newFriend = document.createElement("li");
-    newFriend.textContent = friend;
-    list.appendChild(newFriend);
-  });
+  const friendsHtml = friends.map((friend) => `<li>${friend}</li>`).join("");
+  if (list) {
+    list.innerHTML = friendsHtml;
+  }
 };
 
 export const updateResultDisplay = (result: DrawResult[] | null): void => {
   const resultList = document.getElementById("result");
   const friendsList = document.getElementById("friendsList");
-  const resultDisplay = result ? "none" : "block";
 
   if (!resultList || !friendsList) return;
 
-  resultList.innerHTML = "";
-  friendsList.style.display = resultDisplay;
+  const displayStyle = result ? "none" : "block";
+  const resultHtml = result
+    ? result.map((pair) => `<li>${pair.giver} → ${pair.receiver}</li>`).join("")
+    : "";
 
-  if (result) {
-    result.forEach((pair) => {
-      const resultItem = document.createElement("li");
-      resultItem.textContent = `${pair.giver} → ${pair.receiver}`;
-      resultList.appendChild(resultItem);
-    });
-  }
+  friendsList.style.display = displayStyle;
+  resultList.innerHTML = resultHtml;
 };
 
 export const updateDrawButton = (
@@ -35,12 +28,17 @@ export const updateDrawButton = (
   handlers: ButtonHandlers
 ): void => {
   const button = document.querySelector(".button-draw");
+
   if (!button) return;
-  button.innerHTML = hasResult
-    ? `<img src="assets/play_circle_outline.png" alt="Ícone recomeçar" />
-       Recomeçar`
-    : `<img src="assets/play_circle_outline.png" alt="Ícone sortear" />
-       Sortear amigo`;
+
+  const buttonText = hasResult ? "Recomeçar" : "Sortear amigo";
+  const buttonHtml = `
+    <img src="assets/play_circle_outline.png" 
+         alt="Ícone ${hasResult ? "recomeçar" : "sortear"}" />
+    ${buttonText}
+  `;
+
+  button.innerHTML = buttonHtml;
   (button as HTMLElement).onclick = hasResult
     ? handlers.restart
     : handlers.draw;
