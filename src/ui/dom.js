@@ -11,16 +11,17 @@ export const updateFriendsList = (friends) => {
 export const updateResultDisplay = (result) => {
   const resultList = document.getElementById("result");
   const friendsList = document.getElementById("friendsList");
+  const resultDisplay = result ? "none" : "block";
+
   resultList.innerHTML = "";
+  friendsList.style.display = resultDisplay;
+
   if (result) {
-    friendsList.style.display = "none";
     result.forEach((pair) => {
       const resultItem = document.createElement("li");
       resultItem.textContent = `${pair.giver} → ${pair.receiver}`;
       resultList.appendChild(resultItem);
     });
-  } else {
-    friendsList.style.display = "block";
   }
 };
 
