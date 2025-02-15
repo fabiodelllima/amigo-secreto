@@ -1,0 +1,2 @@
+export const MINIMO_PARTICIPANTES = 6;
+export const MAX_TENTATIVAS_SORTEIO = 100;

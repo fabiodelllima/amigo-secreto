@@ -1,5 +1,5 @@
-export const MINIMO_PARTICIPANTES = 6;
-export const MAX_TENTATIVAS_SORTEIO = 100;
+import { MINIMO_PARTICIPANTES } from "./config.js";
+
 export const MENSAGENS = {
   ERRO_CAMPO_VAZIO: "Por favor, insira um nome.",
   ERRO_MINIMO_PARTICIPANTES: (total) =>
