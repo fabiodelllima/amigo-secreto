@@ -1,7 +1,11 @@
-import { MIN_PARTICIPANTS } from "../constants/config.js";
-import { MESSAGES } from "../constants/messages.js";
+import { MIN_PARTICIPANTS } from "@/constants/config";
+import { MESSAGES } from "@/constants/messages";
+import { ValidationResult } from "@/types";
 
-export function validateNewFriend(name, currentFriends) {
+export function validateNewFriend(
+  name: string,
+  currentFriends: string[]
+): ValidationResult {
   const processedName = name.trim();
   if (processedName === "") {
     return {
@@ -22,7 +26,7 @@ export function validateNewFriend(name, currentFriends) {
   };
 }
 
-export function validateDraw(friends) {
+export function validateDraw(friends: string[]): ValidationResult {
   if (friends.length < MIN_PARTICIPANTS) {
     return {
       valid: false,
@@ -32,7 +36,7 @@ export function validateDraw(friends) {
   if (friends.length % 2 !== 0) {
     return {
       valid: false,
-      error: MESSAGES.ODD_COUNT_ERROR,
+      error: MESSAGES.ODD_PARTICIPANTS_ERROR,
     };
   }
   return {
