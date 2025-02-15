@@ -1,10 +1,12 @@
-export const State = {
+import { AppState, DrawResponse } from "../types";
+
+export const State: AppState = {
   friends: [],
   result: null,
   error: null,
 };
 
-export function addFriendToState(state, newFriend) {
+export function addFriendToState(state: AppState, newFriend: string): AppState {
   return {
     ...state,
     friends: [...state.friends, newFriend],
@@ -12,15 +14,18 @@ export function addFriendToState(state, newFriend) {
   };
 }
 
-export function updateDrawResult(state, result) {
+export function updateDrawResult(
+  state: AppState,
+  result: DrawResponse
+): AppState {
   return {
     ...state,
-    result: result.draw,
-    error: result.error,
+    result: result.draw || null,
+    error: result.error || null,
   };
 }
 
-export function clearState() {
+export function clearState(): AppState {
   return {
     friends: [],
     result: null,
