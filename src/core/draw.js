@@ -1,63 +1,67 @@
-import { MAX_TENTATIVAS_SORTEIO } from "../constants/config.js";
-import { MENSAGENS } from "../constants/messages.js";
+import { MAX_DRAW_ATTEMPTS } from "../constants/config.js";
+import { MESSAGES } from "../constants/messages.js";
 
-function gerarParAmigos(quemEntrega, possiveisRecebedores) {
-  const indexReceber = Math.floor(Math.random() * possiveisRecebedores.length);
-  const quemRecebe = possiveisRecebedores[indexReceber];
-
+function generateFriendPair(giver, possibleReceivers) {
+  const receiverIndex = Math.floor(Math.random() * possibleReceivers.length);
+  const receiver = possibleReceivers[receiverIndex];
   return {
-    quemEntrega,
-    quemRecebe,
-    possiveisRecebedoresRestantes: possiveisRecebedores.filter(
-      (amigo) => amigo !== quemRecebe
+    giver,
+    receiver,
+    remainingPossibleReceivers: possibleReceivers.filter(
+      (friend) => friend !== receiver
     ),
   };
 }
 
-export function gerarSorteio(amigos) {
-  let tentativas = 0;
+export function generateDraw(friends) {
+  let attempts = 0;
 
-  while (tentativas < MAX_TENTATIVAS_SORTEIO) {
-    const resultado = amigos.reduce(
-      (acc, quemEntrega) => {
-        if (acc.falha) return acc;
-        const possiveisRecebedores = amigos.filter(
-          (amigo) => !acc.jaReceberam.includes(amigo) && amigo !== quemEntrega
+  while (attempts < MAX_DRAW_ATTEMPTS) {
+    const result = friends.reduce(
+      (acc, giver) => {
+        if (acc.failure) return acc;
+
+        const possibleReceivers = friends.filter(
+          (friend) => !acc.alreadyReceiving.includes(friend) && friend !== giver
         );
 
-        if (possiveisRecebedores.length === 0) {
-          return { ...acc, falha: true };
+        if (possibleReceivers.length === 0) {
+          return { ...acc, failure: true };
         }
 
-        const par = gerarParAmigos(quemEntrega, possiveisRecebedores);
+        const pair = generateFriendPair(giver, possibleReceivers);
 
         return {
-          pares: [
-            ...acc.pares,
+          pairs: [
+            ...acc.pairs,
             {
-              quemEntrega: par.quemEntrega,
-              quemRecebe: par.quemRecebe,
+              giver: pair.giver,
+              receiver: pair.receiver,
             },
           ],
-          jaReceberam: [...acc.jaReceberam, par.quemRecebe],
-          falha: false,
+          alreadyReceiving: [...acc.alreadyReceiving, pair.receiver],
+          failure: false,
         };
       },
-      { pares: [], jaReceberam: [], falha: false }
+      {
+        pairs: [],
+        alreadyReceiving: [],
+        failure: false,
+      }
     );
 
-    if (!resultado.falha) {
+    if (!result.failure) {
       return {
-        sucesso: true,
-        sorteio: resultado.pares,
+        success: true,
+        draw: result.pairs,
       };
     }
 
-    tentativas++;
+    attempts++;
   }
 
   return {
-    sucesso: false,
-    erro: MENSAGENS.ERRO_SORTEIO,
+    success: false,
+    error: MESSAGES.DRAW_ERROR,
   };
 }

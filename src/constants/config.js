@@ -1,2 +1,2 @@
-export const MINIMO_PARTICIPANTES = 6;
-export const MAX_TENTATIVAS_SORTEIO = 100;
+export const MIN_PARTICIPANTS = 6;
+export const MAX_DRAW_ATTEMPTS = 100;

@@ -1,40 +1,35 @@
-export function atualizarListaAmigos(amigos) {
-  const lista = document.getElementById("listaAmigos");
-  lista.innerHTML = "";
-
-  amigos.forEach((amigo) => {
-    const novoAmigo = document.createElement("li");
-    novoAmigo.textContent = amigo;
-    lista.appendChild(novoAmigo);
+export function updateFriendsList(friends) {
+  const list = document.getElementById("friendsList");
+  list.innerHTML = "";
+  friends.forEach((friend) => {
+    const newFriend = document.createElement("li");
+    newFriend.textContent = friend;
+    list.appendChild(newFriend);
   });
 }
 
-export function atualizarResultadoNaTela(resultado) {
-  const listaResultado = document.getElementById("resultado");
-  const listaAmigos = document.getElementById("listaAmigos");
-
-  listaResultado.innerHTML = "";
-
-  if (resultado) {
-    listaAmigos.style.display = "none";
-    resultado.forEach((par) => {
-      const itemResultado = document.createElement("li");
-      itemResultado.textContent = `${par.quemEntrega} → ${par.quemRecebe}`;
-      listaResultado.appendChild(itemResultado);
+export function updateResultDisplay(result) {
+  const resultList = document.getElementById("result");
+  const friendsList = document.getElementById("friendsList");
+  resultList.innerHTML = "";
+  if (result) {
+    friendsList.style.display = "none";
+    result.forEach((pair) => {
+      const resultItem = document.createElement("li");
+      resultItem.textContent = `${pair.giver} → ${pair.receiver}`;
+      resultList.appendChild(resultItem);
     });
   } else {
-    listaAmigos.style.display = "block";
+    friendsList.style.display = "block";
   }
 }
 
-export function atualizarBotaoSortear(temResultado, handlers) {
-  const botao = document.querySelector(".button-draw");
-
-  botao.innerHTML = temResultado
-    ? `<img src="assets/play_circle_outline.png" alt="Ícone para sortear" />
-           Recomeçar`
-    : `<img src="assets/play_circle_outline.png" alt="Ícone para sortear" />
-           Sortear amigo`;
-
-  botao.onclick = temResultado ? handlers.recomecar : handlers.sortear;
+export function updateDrawButton(hasResult, handlers) {
+  const button = document.querySelector(".button-draw");
+  button.innerHTML = hasResult
+    ? `<img src="assets/play_circle_outline.png" alt="Draw icon" />
+       Start Over`
+    : `<img src="assets/play_circle_outline.png" alt="Draw icon" />
+       Draw Names`;
+  button.onclick = hasResult ? handlers.restart : handlers.draw;
 }

@@ -1,29 +1,29 @@
-export const Estado = {
-  amigos: [],
-  resultado: null,
-  erro: null,
+export const State = {
+  friends: [],
+  result: null,
+  error: null,
 };
 
-export function adicionarAmigoAoEstado(estado, novoAmigo) {
+export function addFriendToState(state, newFriend) {
   return {
-    ...estado,
-    amigos: [...estado.amigos, novoAmigo],
-    erro: null,
+    ...state,
+    friends: [...state.friends, newFriend],
+    error: null,
   };
 }
 
-export function atualizarResultadoSorteio(estado, resultado) {
+export function updateDrawResult(state, result) {
   return {
-    ...estado,
-    resultado: resultado.sorteio,
-    erro: resultado.erro,
+    ...state,
+    result: result.draw,
+    error: result.error,
   };
 }
 
-export function limparEstado() {
+export function clearState() {
   return {
-    amigos: [],
-    resultado: null,
-    erro: null,
+    friends: [],
+    result: null,
+    error: null,
   };
 }
