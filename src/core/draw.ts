@@ -2,76 +2,33 @@ import { MAX_DRAW_ATTEMPTS } from "../constants/config";
 import { MESSAGES } from "../constants/messages";
 import { DrawResponse, DrawResult } from "../types";
 
-interface FriendPairResult {
-  giver: string;
-  receiver: string;
-  remainingPossibleReceivers: string[];
-}
-
-interface DrawAccumulator {
-  pairs: DrawResult[];
-  alreadyReceiving: string[];
-  failure: boolean;
-}
-
 const generateFriendPair = (
   giver: string,
   possibleReceivers: string[]
-): FriendPairResult => {
+): DrawResult => {
   const receiverIndex = Math.floor(Math.random() * possibleReceivers.length);
   const receiver = possibleReceivers[receiverIndex];
-  return {
-    giver,
-    receiver,
-    remainingPossibleReceivers: possibleReceivers.filter(
-      (friend) => friend !== receiver
-    ),
-  };
+  return { giver, receiver };
 };
 
-export function generateDraw(friends: string[]): DrawResponse {
+export const generateDraw = (friends: string[]): DrawResponse => {
   let attempts = 0;
 
   while (attempts < MAX_DRAW_ATTEMPTS) {
-    const result = friends.reduce<DrawAccumulator>(
-      (acc, giver) => {
-        if (acc.failure) {
-          return acc;
-        }
+    const result = friends.reduce<DrawResult[]>((pairs, giver) => {
+      const usedReceivers = pairs.map((pair) => pair.receiver);
+      const possibleReceivers = friends.filter(
+        (friend) => !usedReceivers.includes(friend) && friend !== giver
+      );
 
-        const possibleReceivers = friends.filter(
-          (friend) => !acc.alreadyReceiving.includes(friend) && friend !== giver
-        );
+      if (possibleReceivers.length === 0) return [];
+      return [...pairs, generateFriendPair(giver, possibleReceivers)];
+    }, []);
 
-        if (possibleReceivers.length === 0) {
-          return { ...acc, failure: true };
-        }
-
-        const pair = generateFriendPair(giver, possibleReceivers);
-
-        return {
-          pairs: [
-            ...acc.pairs,
-            {
-              giver: pair.giver,
-              receiver: pair.receiver,
-            },
-          ],
-          alreadyReceiving: [...acc.alreadyReceiving, pair.receiver],
-          failure: false,
-        };
-      },
-      {
-        pairs: [],
-        alreadyReceiving: [],
-        failure: false,
-      }
-    );
-
-    if (!result.failure) {
+    if (result.length === friends.length) {
       return {
         success: true,
-        draw: result.pairs,
+        draw: result,
       };
     }
 
@@ -82,4 +39,4 @@ export function generateDraw(friends: string[]): DrawResponse {
     success: false,
     error: MESSAGES.DRAW_ERROR,
   };
-}
+};
