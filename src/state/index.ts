@@ -6,29 +6,26 @@ export const State: AppState = {
   error: null,
 };
 
-export function addFriendToState(state: AppState, newFriend: string): AppState {
-  return {
-    ...state,
-    friends: [...state.friends, newFriend],
-    error: null,
-  };
-}
+export const addFriendToState = (
+  state: AppState,
+  newFriend: string
+): AppState => ({
+  ...state,
+  friends: [...state.friends, newFriend],
+  error: null,
+});
 
-export function updateDrawResult(
+export const updateDrawResult = (
   state: AppState,
   result: DrawResponse
-): AppState {
-  return {
-    ...state,
-    result: result.draw || null,
-    error: result.error || null,
-  };
-}
+): AppState => ({
+  ...state,
+  result: result.draw || null,
+  error: result.error || null,
+});
 
-export function clearState(): AppState {
-  return {
-    friends: [],
-    result: null,
-    error: null,
-  };
-}
+export const clearState = (): AppState => ({
+  friends: [],
+  result: null,
+  error: null,
+});
