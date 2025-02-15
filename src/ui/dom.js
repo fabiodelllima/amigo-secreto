@@ -1,4 +1,4 @@
-export function updateFriendsList(friends) {
+export const updateFriendsList = (friends) => {
   const list = document.getElementById("friendsList");
   list.innerHTML = "";
   friends.forEach((friend) => {
@@ -6,9 +6,9 @@ export function updateFriendsList(friends) {
     newFriend.textContent = friend;
     list.appendChild(newFriend);
   });
-}
+};
 
-export function updateResultDisplay(result) {
+export const updateResultDisplay = (result) => {
   const resultList = document.getElementById("result");
   const friendsList = document.getElementById("friendsList");
   resultList.innerHTML = "";
@@ -22,9 +22,9 @@ export function updateResultDisplay(result) {
   } else {
     friendsList.style.display = "block";
   }
-}
+};
 
-export function updateDrawButton(hasResult, handlers) {
+export const updateDrawButton = (hasResult, handlers) => {
   const button = document.querySelector(".button-draw");
   button.innerHTML = hasResult
     ? `<img src="assets/play_circle_outline.png" alt="Draw icon" />
@@ -32,4 +32,4 @@ export function updateDrawButton(hasResult, handlers) {
     : `<img src="assets/play_circle_outline.png" alt="Draw icon" />
        Draw Names`;
   button.onclick = hasResult ? handlers.restart : handlers.draw;
-}
+};
