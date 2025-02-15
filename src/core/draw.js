@@ -1,7 +1,7 @@
 import { MAX_DRAW_ATTEMPTS } from "../constants/config.js";
 import { MESSAGES } from "../constants/messages.js";
 
-function generateFriendPair(giver, possibleReceivers) {
+const generateFriendPair = (giver, possibleReceivers) => {
   const receiverIndex = Math.floor(Math.random() * possibleReceivers.length);
   const receiver = possibleReceivers[receiverIndex];
   return {
@@ -11,7 +11,7 @@ function generateFriendPair(giver, possibleReceivers) {
       (friend) => friend !== receiver
     ),
   };
-}
+};
 
 export function generateDraw(friends) {
   let attempts = 0;
