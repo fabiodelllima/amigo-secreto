@@ -14,7 +14,7 @@
 </div>
 
 <br>
- 
+
 <div align="center">
   https://secreto-amigo.vercel.app
 </div>
@@ -191,13 +191,3 @@ Este projeto é parte de uma jornada de aprendizado no programa Oracle Next Educ
 - Oracle e Alura pela oportunidade de participação no programa ONE
 - Instrutores e mentores do programa
 - Comunidade de desenvolvedores do Oracle ONE
-
-<br>
-
----
-
-<div align="center"> 
-  <br>
-  
-  Desenvolvido com ❤ como parte do programa ONE
-</div>
