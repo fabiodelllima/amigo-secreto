@@ -170,12 +170,41 @@ Siga estes passos para configurar o projeto em seu ambiente local:
 
 ## Funcionamento
 
+Siga estes passos para utilizar a aplicação:
+
 1. Digite o nome de um participante no campo de entrada
 2. Clique em "Adicionar" ou pressione Enter
 3. Repita o processo até ter no mínimo 6 participantes (número par)
 4. Clique em "Sortear amigo" para realizar o sorteio
 5. Os resultados serão exibidos na tela
 6. Use o botão "Recomeçar" para fazer um novo sorteio
+
+### Diagrama
+
+O diagrama abaixo ilustra o fluxo interno da aplicação, incluindo as validações e o algoritmo de sorteio:
+
+```mermaid
+flowchart TD
+    A[Usuário insere nome] --> B{Nome é válido?}
+    B -->|Não| C[Exibe mensagem de erro]
+    C --> A
+    B -->|Sim| D[Adiciona nome à lista]
+    D --> E{Mínimo de 6 participantes?}
+    E -->|Não| A
+    E -->|Sim| F{Número par de participantes?}
+    F -->|Não| A
+    F -->|Sim| G[Habilita botão de sorteio]
+    G --> H[Usuário solicita sorteio]
+    H --> I[Algoritmo embaralha nomes]
+    I --> J[Verifica que ninguém tirou a si mesmo]
+    J --> K{Sorteio válido?}
+    K -->|Não| L[Tenta novamente até limite]
+    L --> I
+    K -->|Sim| M[Exibe resultados na tela]
+    M --> N[Usuário pode reiniciar]
+    N --> O[Limpa todos os dados]
+    O --> A
+```
 
 ## Oracle Next Education — ONE
 
