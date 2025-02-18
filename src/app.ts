@@ -1,52 +1,61 @@
-import { validateNewFriend, validateDraw } from "./core/validators.js";
-import { setupEventListeners } from "./ui/events.js";
-import { generateDraw } from "./core/draw.js";
+import { validateNewFriend, validateDraw } from "./core/validators";
+import { setupEventListeners } from "./ui/events";
+import { generateDraw } from "./core/draw";
 import {
   State,
   addFriendToState,
   updateDrawResult,
   clearState,
-} from "./state/index.js";
+} from "./state/index";
 import {
   updateFriendsList,
   updateResultDisplay,
   updateDrawButton,
-} from "./ui/dom.js";
+} from "./ui/dom";
 
-function addFriend() {
-  const input = document.getElementById("friend");
+declare global {
+  interface Window {
+    addFriend: () => void;
+    drawNames: () => void;
+    restartGame: () => void;
+  }
+}
+
+function addFriend(): void {
+  const input = document.getElementById("friend") as HTMLInputElement;
   const name = input.value;
-
   const validation = validateNewFriend(name, State.friends);
+  const newState = validation.valid
+    ? addFriendToState(State, validation.name!)
+    : State;
+
   if (!validation.valid) {
     alert(validation.error);
     return;
   }
 
-  const newState = addFriendToState(State, validation.name);
   Object.assign(State, newState);
-
   updateFriendsList(State.friends);
   input.value = "";
   input.focus();
 }
 
-function drawNames() {
+function drawNames(): void {
   const validation = validateDraw(State.friends);
+  const result = validation.valid ? generateDraw(State.friends) : null;
+  const newState = result?.success ? updateDrawResult(State, result) : State;
+
   if (!validation.valid) {
     alert(validation.error);
     return;
   }
 
-  const result = generateDraw(State.friends);
-  if (!result.success) {
-    alert(result.error);
+  if (!result?.success) {
+    alert(result?.error);
     return;
   }
 
-  const newState = updateDrawResult(State, result);
   Object.assign(State, newState);
-
   updateResultDisplay(State.result);
   updateDrawButton(true, {
     restart: restartGame,
@@ -54,12 +63,11 @@ function drawNames() {
   });
 }
 
-function restartGame() {
+function restartGame(): void {
+  const input = document.getElementById("friend") as HTMLInputElement;
   const newState = clearState();
+
   Object.assign(State, newState);
-
-  const input = document.getElementById("friend");
-
   updateFriendsList(State.friends);
   updateResultDisplay(null);
   updateDrawButton(false, {
