@@ -1,5 +1,3 @@
-<br>
-
 <div align="center">
   <img height="130" src="https://i.imgur.com/HRTwDTP.png"> 
 </div>
@@ -23,7 +21,7 @@
 
 # ONE Challenge
 
-> Este projeto representa um dos desafios do programa **Oracle Next Education (ONE)**, uma iniciativa da Oracle em parceria com a Alura que visa capacitar pessoas em tecnologia e conectá-las com oportunidades de emprego na América Latina. A aplicação desenvolvida é um sistema interativo para organizar sorteios de Amigo Secreto, aplicando conceitos modernos de desenvolvimento front-end.
+Este projeto representa um dos desafios do programa **Oracle Next Education (ONE)**, uma iniciativa da Oracle em parceria com a Alura que visa capacitar pessoas em tecnologia e conectá-las com oportunidades de emprego na América Latina. A aplicação desenvolvida é um sistema interativo para organizar sorteios de Amigo Secreto, aplicando conceitos modernos de desenvolvimento front-end.
 
 ### Índice
 
@@ -102,6 +100,8 @@ O projeto utiliza GitFlow para organização das branches:
 - Tags para releases (ex: v1.0, v1.1)
 
 ### V.1.2 ' SASS/SCSS
+
+> Versão em desenvolvimento
 
 A próxima versão focará em uma reelaboração completa da interface, agora que a lógica está desenvolvida e bem testada. As principais melhorias incluirão:
 
@@ -199,5 +199,5 @@ Este projeto é parte de uma jornada de aprendizado no programa Oracle Next Educ
 <div align="center"> 
   <br>
   
-  Desenvolvido com 🖤 como parte do programa **ONE**
+  Desenvolvido com ❤ como parte do programa ONE
 </div>
