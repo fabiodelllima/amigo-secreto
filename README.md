@@ -16,7 +16,7 @@
 <br>
 
 <div align="center">
-  https://secreto-amigo.vercel.app
+  https://oracleonechallenge.vercel.app
 </div>
 
 # ONE Challenge
